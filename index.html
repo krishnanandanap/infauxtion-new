@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infauxtion - Dynamic Health Chaos Generator</title>
+    <meta name="description" content="Want to ruin your health in record time? We'll show you how — and then stop you just in time.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💀</text></svg>">
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <!-- Chaos Particles -->
+    <div class="chaos-particle" style="left: 10%; animation-delay: 0s;">💀</div>
+    <div class="chaos-particle" style="left: 20%; animation-delay: 3s;">🦠</div>
+    <div class="chaos-particle" style="left: 30%; animation-delay: 6s;">💊</div>
+    <div class="chaos-particle" style="left: 40%; animation-delay: 9s;">🚬</div>
+    <div class="chaos-particle" style="left: 50%; animation-delay: 12s;">🍔</div>
+    <div class="chaos-particle" style="left: 60%; animation-delay: 2s;">☠️</div>
+    <div class="chaos-particle" style="left: 70%; animation-delay: 5s;">🍺</div>
+    <div class="chaos-particle" style="left: 80%; animation-delay: 8s;">🚭</div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="resetGame()">💀 INFAUXTION</a>
+            <ul class="nav-links">
+                <li><a onclick="resetGame()">Reset Chaos</a></li>
+                <li><a onclick="showAbout()">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- History Toggle -->
+    <button class="history-toggle" onclick="toggleHistory()">📜 Chaos Log</button>
+
+    <!-- History Panel -->
+    <div class="history-panel" id="historyPanel">
+        <h3 style="color: #ff416c; margin-bottom: 1rem;">Your Health Spiral Journey</h3>
+        <div id="historyContent">
+            <p style="color: #888; font-style: italic;">Start your chaos journey to build your disaster log...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero" id="heroSection">
+            <h1>INFAUXTION</h1>
+            <div class="tagline">"Want to ruin your health in record time? We'll show you how — and then stop you just in time."</div>
+            <div class="subtitle">Where you'll laugh your way through the worst health decisions you could possibly make.</div>
+            <p>Choose between terrible and smart options. Pick wrong? Get a hilariously dramatic consequence (zombie rash, anyone?). Then we'll hit you with the real science — quick, clear, and useful.</p>
+            <p><strong>We use comedy and chaos to teach you how to stay healthy.</strong> Because learning should be unforgettable — and fun.</p>
+            <button class="start-btn" onclick="startGame()">Begin Your Personalized Chaos 🌪️</button>
+        </div>
+
+        <!-- Condition Input Section -->
+        <div class="condition-input-section hidden" id="conditionInput">
+            <div class="input-group">
+                <label class="input-label">🔬 What Health Issue Do You Want to Spectacularly Mismanage?</label>
+                <input 
+                    type="text" 
+                    class="condition-input" 
+                    id="healthCondition" 
+                    placeholder="Type any condition... headache, anxiety, back pain, insomnia, etc."
+                    onkeypress="handleInputKeypress(event)"
+                >
+            </div>
+            
+            <div class="quick-suggestions">
+                <div class="suggestion-btn" onclick="useCondition('migraine headache')">🤕 Migraine</div>
+                <div class="suggestion-btn" onclick="useCondition('anxiety attack')">😰 Anxiety</div>
+                <div class="suggestion-btn" onclick="useCondition('food poisoning')">🤢 Food Poisoning</div>
+                <div class="suggestion-btn" onclick="useCondition('insomnia')">😴 Insomnia</div>
+                <div class="suggestion-btn" onclick="useCondition('back pain')">🔥 Back Pain</div>
+                <div class="suggestion-btn" onclick="useCondition('hangover')">🍺 Hangover</div>
+                <div class="suggestion-btn" onclick="useCondition('allergic reaction')">🤧 Allergies</div>
+                <div class="suggestion-btn" onclick="useCondition('heartburn')">🔥 Heartburn</div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="start-btn" onclick="generateScenario()" id="generateBtn" disabled>
+                    🎭 Generate My Chaos Scenario
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Interface -->
+        <div class="game-interface hidden" id="gameInterface">
+            <!-- Health Status -->
+            <div class="health-status">
+                <h3 style="color: #ff416c; margin-bottom: 1rem;">📊 Current Disaster Status</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <div class="status-label">Condition</div>
+                        <div class="status-value good" id="currentCondition">None</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Chaos Level</div>
+                        <div class="status-value good" id="chaosLevel">Level 0</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Bad Decisions</div>
+                        <div class="status-value" id="decisionCount">0</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Disaster Score</div>
+                        <div class="status-value" id="disasterScore">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Scenario -->
+            <div class="scenario-text hidden" id="scenarioText">
+                Your personalized health chaos journey begins here...
+            </div>
+
+            <!-- Chaos Level Indicator -->
+            <div class="spiral-level level-1 hidden" id="chaosIndicator">
+                <strong>Chaos Level 0:</strong> Blissfully Ignoring Reality
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons hidden" id="actionButtons">
+                <button class="action-btn chaos-btn" onclick="makeChoice('chaos')" id="chaosBtn">
+                    🔥 Make It Spectacularly Worse
+                </button>
+                <button class="action-btn wisdom-btn" onclick="makeChoice('wisdom')" id="wisdomBtn">
+                    🧠 Actually Be Smart For Once
+                </button>
+            </div>
+
+            <!-- Consequence Display -->
+            <div class="consequence-box" id="consequenceBox">
+                <div id="consequenceContent"></div>
+            </div>
+
+            <!-- Medical Fact -->
+            <div class="medical-fact" id="medicalFact">
+                <h4>📚 Reality Check: The Actual Science</h4>
+                <div id="medicalContent"></div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading hidden" id="loadingState">
+                <div class="loading-dots">Generating your personalized health disaster</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
