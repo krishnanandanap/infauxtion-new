@@ -11,7 +11,7 @@
 ## Welcome to **Infauxtion** — where you don’t just learn about health...  
 ## You spiral into bad decisions for fun (and science).
 
-### Team Name : AurAFArmers
+### Team Name : Aurafarmers
 
 ### Team Members
 - Member 1:[Krishna Nandana P] - [Model Engineering College]
