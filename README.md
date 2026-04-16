@@ -178,7 +178,6 @@ Works on Netlify, Vercel, GitHub Pages, AWS S3, or any static host
 
 
 
-Ask ChatGPT
 
 
 
@@ -189,5 +188,6 @@ Ask ChatGPT
 
 
 
-Ask ChatGPT
+
+
 
